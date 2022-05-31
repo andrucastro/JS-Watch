@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        body{
+            background-color: #8da3a6;
+        }
+        
+        .clock{
+            width: 30rem;
+            height: 30rem;
+            border: 20px solid white;
+            border-radius: 50%;
+            margin: 50px auto;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .clock-face{
+            position: relative;
+            width: 100%;
+            height:100%;
+            transform: translate(-3px);
+        }
+
+        .hand{
+            border-radius:5px;
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: all 0.05s;
+        }
+
+        .second-hand{
+            height: 3px;
+            width: 50%;
+            background-color: #fdd68d;
+            
+        }
+
+        .minute-hand{
+            height: 8px;
+            width: 40%;
+            left:10%;
+            background-color: #4b7bb1;
+        }
+
+        .hour-hand{
+            height: 15px;
+            width: 30%;
+            left: 20%;
+            background-color: #553a2b;
+        }
+
+        .center{
+            width: 6%;
+            height: 6%;
+            background: #292929;
+            border-radius: 100px;
+            position: absolute;
+            top: 48%;
+            left: 47%;
+        }
+
+        p{
+         text-align: center;
+         font-size: 32px;
+         color: #292929;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand second-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand hour-hand"></div>
+            <div class="center"></div>
+        </div>
+    </div>
+
+    <p id="number-time"></p>
+
+    <script>
+
+        const secondHand = document.querySelector('.second-hand');
+        const minuteHand = document.querySelector('.minute-hand');
+        const hourHand = document.querySelector('.hour-hand');
+
+        function setDate(){
+            const time = new Date();
+
+            const seconds = time.getSeconds();
+            // transform seconds into degree values 
+            const secondsDegrees = ((seconds/60) * 360) + 90;
+            secondHand.style.transform = `rotate(${secondsDegrees}deg`; 
+        
+
+            const minutes = time.getMinutes();
+            const minsDegrees = ((minutes/ 60) * 360) + 90;
+            minuteHand.style.transform = `rotate(${minsDegrees}deg`; 
+
+
+             const hours = time.getMinutes();
+             const hoursDegrees = ((hours/ 12) * 360) + 90;
+             hourHand.style.transform = `rotate(${hoursDegrees}deg`; 
+        } 
+
+        // run function setDate() every second
+        setInterval(setDate, 1000);
+
+      let time = new Date();  
+      document.getElementById("number-time").innerHTML =` Current Time: ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+  
+
+    </script>
+</body>
+</html>
